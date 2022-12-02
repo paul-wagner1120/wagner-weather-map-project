@@ -1,20 +1,28 @@
 "use strict";
+
 mapboxgl.accessToken = mapBoxKey;
+
 let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
     zoom: 10,
     center: [-93.054429, 34.508414]
 });
+//--variable referencing empty container in HTML doc--//
 let cardContainer = $('#card-container')
+
+
 let lat = 34.5037;
 let long = -93.0552;
 $.get("https://api.openweathermap.org/data/2.5/forecast?lat="+ lat +"&lon="+ long +"&appid=" + weatherMapKey + "&units=imperial").done(function(data) {
     let reports = data.list;
     let html = '';
+
     for(let i = 0; i < reports.length; i += 8) {
         // should get 5 objects back
         console.log(reports[i]);
+
+               //--variables storing data from object properties--//
             let cardHead = reports[i].dt_txt.split(' ');
             let highTemp = reports[i].main.temp_max;
             let lowTemp = reports[i].main.temp_min;
@@ -24,6 +32,8 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?lat="+ lat +"&lon="+ lon
             let windSpeed = reports[i].wind.speed;
             let pressure = reports[i].main.pressure;
 
+
+            //--building the forecast cards via "for" loop--//
             html +=
             '<div class="card text-center" style="width: 18rem;">' +
                 '<div class="card-header">' + cardHead[0] + '</div>' +
@@ -35,6 +45,7 @@ $.get("https://api.openweathermap.org/data/2.5/forecast?lat="+ lat +"&lon="+ lon
                     '</ul>'+
             '</div>'
     }
+    //--pushing forecast cards into empty div--//
     cardContainer.html(html);
 });
 
