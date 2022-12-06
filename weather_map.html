@@ -20,16 +20,28 @@
 
 </head>
 <body>
+<nav class="navbar navbar-light">
+    <div class="container-fluid d-flex mt-3 mb-3 justify-content-center">
+        <a class="navbar-brand"><h1>Paul's Weather Map Project</h1></a>
+        <form class="d-flex">
+            <input id="userInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button id="getInput" class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
 
-    <h1>Weather Map Project</h1>
 
         <!--5-Day Forecast Cards-->
-        <div id="card-container" class="d-flex justify-content-evenly">
+        <div id="card-container" class="d-flex justify-content-evenly m-2">
             <!--html is being brought in from JS-->
         </div>
 
+    <h2 id="weatherLocation" class="border border-3 m-3 w-50 d-flex justify-content-center ms-auto me-auto text-center">
+        Click anywhere on the map to update the 5-day forecast!
+    </h2>
+
             <!--HTML Mapbox Container-->
-            <div id="map" class="mt-3"></div>
+            <div id="map" class="mt-3 w-75 m-auto rounded-3"></div>
 
 <!--Mapbox JS -->
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>

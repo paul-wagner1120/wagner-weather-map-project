@@ -10,17 +10,21 @@ let map = new mapboxgl.Map({
 });
 
 let marker = new mapboxgl.Marker();
-
+let locationOfClick = $('#weatherLocation');
 function add_marker(event){
     let coords = event.lngLat;
     console.log('Lng:', coords.lng, 'Lat:', coords.lat);
     marker.setLngLat(coords).addTo(map);
     getWeather(coords.lat, coords.lng);
+    reverseGeocode({lat: coords.lat, lng: coords.lng}, mapBoxKey).then(function(results) {
+        console.log(results);
+        locationOfClick.html(results);
+    })
 }
 map.on('click', add_marker);
 
 //--variable referencing empty container in HTML doc--//
-let cardContainer = $('#card-container')
+let cardContainer = $('#card-container');
 
 let lat = 34.5037;
 let long = -93.0552;
@@ -45,7 +49,7 @@ function getWeather(lat,long){
 
             //--building the forecast cards via "for" loop--//
             html +=
-                '<div class="card text-center" style="width: 18rem;">' +
+                '<div class="card text-center mt-3 mb-3" style="width: 18rem;">' +
                 '<div class="card-header">' + cardHead[0] + '</div>' +
                 '<ul class="list-group list-group-flush">' +
                 '<li class="list-group-item"><span>' + highTemp + '*F / ' + lowTemp + '*F</span><br><img src="https://openweathermap.org/img/w/' + iconCode + '.png" alt="Weather Icon"></li>'+
@@ -60,3 +64,5 @@ function getWeather(lat,long){
     });
 }
 getWeather(lat,long);
+
+
